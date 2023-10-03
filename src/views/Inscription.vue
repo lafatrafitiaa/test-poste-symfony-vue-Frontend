@@ -1,4 +1,4 @@
-<script>
+<script lang="ts" setup>
 import { ref } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
@@ -17,7 +17,7 @@ const router = useRouter();
  * onclick du message d'erreur
  */
 const inscription = () => {
-  console.log(email);
+  console.log("mail: ", email);
   const url = "http://localhost:8000/register";
   const data = {
     email: email.value,

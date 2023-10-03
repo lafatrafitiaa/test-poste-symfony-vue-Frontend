@@ -1,4 +1,4 @@
-<script>
+<script lang="ts" setup>
 import axios from 'axios';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -18,6 +18,8 @@ const router = useRouter();
  */
 const connecter = () => {
   const url = "http://localhost:8000/api/login";
+
+  console.log("mail: ", email);
   const data = {
     email: email.value,
     plainPassword: motDePasse.value
@@ -54,12 +56,13 @@ const connecter = () => {
           v-model="email"></v-text-field>
         <v-text-field label="Password" class=" my-2" type="password" v-model="motDePasse"></v-text-field>
         <div class="text-center">
-          <v-btn rounded="lg" class="bg-teal-darken-1 my-4" size="large" @click="connecter" :loading="connectionEncours">
+          <v-btn rounded="lg" class="bg-teal-darken-1 my-4" size="large" @click="connecter()">
             Se connecter
           </v-btn>
         </div>
-        <p class="text-center my-4">Vous n'avez pas encore un compte?</p>
-        <a href="/signup">S'inscrire</a>
+        <p class="text-center my-4">Vous n'avez pas encore un compte?
+          <a href="/signup">S'inscrire</a>
+        </p>
       </v-col>
     </v-row>
   </v-container>

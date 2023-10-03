@@ -4,7 +4,7 @@
       <v-avatar color="surface-variant" size="60"></v-avatar>
     </div>
     <div class="px-4 py-3 flex-column align-center my-auto w-100">
-      <h3>{{ message.person.username }}</h3>
+      <h3>{{ message.person }}</h3>
       <p>{{ message.contenue }}</p>
     </div>
   </div>

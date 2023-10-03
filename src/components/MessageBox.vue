@@ -17,7 +17,7 @@
           <v-col cols="12" class="d-flex gap-2">
             <v-text-field v-model="message" variant="filled" clear-icon="mdi-close-circle" clearable label="Message"
               type="text" @click:append="sendMessage" @click:clear="clearMessage"></v-text-field>
-            <v-btn icon="mdi-send-variant" size="large"></v-btn>
+            <v-btn icon="mdi-send-variant" size="large" @click="send"></v-btn>
           </v-col>
         </v-row>
       </v-form>
@@ -25,8 +25,11 @@
   </div>
 </template>
 
-<script>
+<script lang="ts" setup>
+import axios from 'axios';
 import { ref } from 'vue';
+
+const qs = require('qs');
 
 const message = ref('');
 
@@ -36,6 +39,32 @@ const clearMessage = () => {
 
 const sendMessage = () => {
   clearMessage();
+}
+
+const send = () => {
+  try {
+    const url = "http://127.0.0.1:8000/send-message";
+    const data = {
+      senderId: 1,
+      receiverId: 2,
+      messages: message.value
+    };
+
+    axios.post(url, qs.stringify(data), {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+      .then(response => {
+        console.log('success', response);
+      })
+      .catch(error => {
+        console.log('error: ', error);
+      });
+  } catch (error) {
+
+  }
+
 }
 </script>
 
